@@ -1,3 +1,4 @@
+import SmoothScroll from './components/SmoothScroll'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ChiSiamo from './components/ChiSiamo'
@@ -11,18 +12,20 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <SmoothScroll>
       <Navbar />
-      <Hero />
-      <ChiSiamo />
-      <Servizi />
-      <Prodotti />
-      <Portfolio />
-      <Vantaggi />
-      <Processo />
-      <Contatti />
+      <main>
+        <Hero />
+        <ChiSiamo />
+        <Servizi />
+        <Prodotti />
+        <Portfolio />
+        <Vantaggi />
+        <Processo />
+        <Contatti />
+      </main>
       <Footer />
-    </div>
+    </SmoothScroll>
   )
 }
 

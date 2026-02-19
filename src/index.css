@@ -2,93 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: #1e293b;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+:root {
+  --ink: #0a0a0a;
+  --paper: #f5f0eb;
+  --cream: #ede7df;
+  --rust: #c43e1c;
+  --midnight: #0d1b2a;
+  --slate: #415a77;
 }
 
-@layer components {
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    background-color: #dc2626;
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  }
-  .btn-primary:hover {
-    background-color: #b91c1c;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    transform: translateY(-2px);
-  }
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-  }
-  .btn-secondary:hover {
-    background-color: #ffffff;
-    color: #0f2d6e;
-  }
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    border: 2px solid #1e40af;
-    color: #1e40af;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.3s;
-  }
-  .btn-outline:hover {
-    background-color: #1e40af;
-    color: #ffffff;
-  }
-  .section-padding {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  @media (min-width: 640px) {
-    .section-padding {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-  @media (min-width: 768px) {
-    .section-padding {
-      padding-top: 7rem;
-      padding-bottom: 7rem;
-    }
-  }
-  @media (min-width: 1024px) {
-    .section-padding {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-  .container-custom {
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background-color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--rust);
+  color: white;
+}
+
+.heading-xl {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(3rem, 8vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.heading-lg {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(2.5rem, 6vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.heading-md {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.text-serif-italic {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+}
+
+.text-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--slate);
+}
+
+.img-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.img-reveal.revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+.rule-accent {
+  width: 60px;
+  height: 3px;
+  background: var(--rust);
+  border: none;
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--slate);
+  border-radius: 2px;
 }

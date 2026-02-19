@@ -1,102 +1,120 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import foto7 from '../assets/foto/foto-7.webp'
 import foto8 from '../assets/foto/foto-8.webp'
 import foto9 from '../assets/foto/foto-9.webp'
-import foto10 from '../assets/foto/foto-10.webp'
-import foto11 from '../assets/foto/foto-11.webp'
-import foto12 from '../assets/foto/foto-12.webp'
 import foto15 from '../assets/foto/foto-15.webp'
 import foto16 from '../assets/foto/foto-16.webp'
-import foto17 from '../assets/foto/foto-17.webp'
-import foto18 from '../assets/foto/foto-18.webp'
 import foto20 from '../assets/foto/foto-20.webp'
+import foto18 from '../assets/foto/foto-18.webp'
+import foto12 from '../assets/foto/foto-12.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const progetti = [
-  { image: foto7, title: 'FIP Tour — Bandol, Francia', category: 'outdoor', desc: 'Installazione campi per torneo internazionale' },
-  { image: foto8, title: 'FIP Silver — Port de Bandol', category: 'outdoor', desc: 'Campo principale torneo con tribune' },
-  { image: foto9, title: 'FIP Tour — Area Multi-campo', category: 'outdoor', desc: 'Installazione completa area torneo' },
-  { image: foto15, title: 'Circo Massimo — Roma', category: 'outdoor', desc: 'Campi da padel per evento Race for the Cure' },
-  { image: foto16, title: 'Installazione Urbana — Sicilia', category: 'outdoor', desc: 'Campo outdoor con illuminazione LED' },
-  { image: foto11, title: 'Campo Panoramico — Campagna', category: 'outdoor', desc: 'Installazione panoramica con vetri temperati' },
-  { image: foto12, title: 'Centro Sportivo — Rurale', category: 'outdoor', desc: 'Impianto outdoor in contesto paesaggistico' },
-  { image: foto18, title: 'Padel Factory — Indoor', category: 'indoor', desc: 'Centro indoor professionale multi-campo' },
-  { image: foto17, title: 'Centro Multisport — Montagna', category: 'multisport', desc: 'Impianto multisport con erba sintetica' },
-  { image: foto20, title: 'Campo Padel Verde — Roma', category: 'outdoor', desc: 'Campo con erba sintetica verde e bordi rossi' },
-  { image: foto10, title: 'Installazione Rurale — Italia', category: 'outdoor', desc: 'Campo in fase di completamento con vista collinare' },
-]
-
-const filtri = [
-  { label: 'Tutti', value: 'tutti' },
-  { label: 'Outdoor', value: 'outdoor' },
-  { label: 'Indoor', value: 'indoor' },
-  { label: 'Multisport', value: 'multisport' },
+  { image: foto7, title: 'FIP Tour — Bandol', location: 'Francia', type: 'Torneo Internazionale' },
+  { image: foto8, title: 'FIP Silver', location: 'Port de Bandol', type: 'Campo Principale' },
+  { image: foto15, title: 'Circo Massimo', location: 'Roma, Italia', type: 'Evento Sportivo' },
+  { image: foto16, title: 'Lungomare', location: 'Sicilia, Italia', type: 'Outdoor Urbano' },
+  { image: foto20, title: 'Campo Padel Verde', location: 'Roma, Italia', type: 'Residenziale' },
+  { image: foto18, title: 'Padel Factory', location: 'Italia', type: 'Centro Indoor' },
+  { image: foto9, title: 'Area Multi-campo', location: 'Francia', type: 'Torneo' },
+  { image: foto12, title: 'Centro Sportivo', location: 'Italia', type: 'Outdoor Rurale' },
 ]
 
 export default function Portfolio() {
-  const [filtro, setFiltro] = useState('tutti')
+  const sectionRef = useRef(null)
 
-  const progettiFiltrati = filtro === 'tutti'
-    ? progetti
-    : progetti.filter(p => p.category === filtro)
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const items = sectionRef.current?.querySelectorAll('.portfolio-item')
+      items?.forEach((item, i) => {
+        const direction = i % 3 === 0 ? -40 : i % 3 === 1 ? 60 : -20
+        gsap.from(item, {
+          y: Math.abs(direction) + 40,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: item, start: 'top 90%', toggleActions: 'play none none reverse' },
+        })
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section id="portfolio" className="section-padding bg-steel-900">
-      <div className="container-custom mx-auto">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-accent-400 font-semibold text-sm uppercase tracking-widest">Portfolio</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
-            I nostri progetti realizzati
-          </h2>
-          <p className="text-lg text-steel-400">
-            Ogni impianto racconta una storia di competenza, precisione e passione. Scopri alcuni dei nostri lavori in Italia e in Europa.
-          </p>
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {filtri.map((f) => (
-            <button
-              key={f.value}
-              onClick={() => setFiltro(f.value)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                filtro === f.value
-                  ? 'bg-accent-500 text-white shadow-lg'
-                  : 'bg-steel-800 text-steel-300 hover:bg-steel-700 hover:text-white'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {progettiFiltrati.map((progetto, i) => (
-            <div key={i} className="group relative rounded-2xl overflow-hidden aspect-[4/3]">
-              <img
-                src={progetto.image}
-                alt={progetto.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-steel-900/90 via-steel-900/20 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-lg font-bold text-white">{progetto.title}</h3>
-                <p className="text-sm text-steel-300 mt-1">{progetto.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <p className="text-steel-400 mb-6">Vuoi vedere il tuo progetto qui?</p>
-          <a href="#contatti" className="btn-primary">
-            Contattaci per un preventivo
-          </a>
+    <section id="portfolio" ref={sectionRef} className="relative py-32 md:py-44 bg-ink overflow-hidden">
+      <div className="px-6 md:px-12 lg:px-20 mb-16 md:mb-24">
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-12 md:col-span-8">
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">(Portfolio)</span>
+            <h2 className="heading-lg text-white mt-4">Progetti<br /><span className="text-serif-italic text-rust">realizzati</span></h2>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:flex md:items-end">
+            <p className="text-body text-white/30 mb-2">Ogni impianto racconta una storia di competenza, precisione e passione.</p>
+          </div>
         </div>
       </div>
+
+      {/* Masonry-like asymmetric grid */}
+      <div className="px-6 md:px-12 lg:px-20">
+        <div className="grid grid-cols-12 gap-4 md:gap-6">
+          {/* Row 1: large left, small right offset up */}
+          <div className="portfolio-item col-span-12 md:col-span-7">
+            <ProjectCard project={progetti[0]} aspect="aspect-[16/10]" />
+          </div>
+          <div className="portfolio-item col-span-12 md:col-span-5 md:mt-16">
+            <ProjectCard project={progetti[1]} aspect="aspect-[4/3]" />
+          </div>
+
+          {/* Row 2: small left offset, large right */}
+          <div className="portfolio-item col-span-12 md:col-span-4 md:-mt-8">
+            <ProjectCard project={progetti[2]} aspect="aspect-[3/4]" />
+          </div>
+          <div className="portfolio-item col-span-12 md:col-span-8">
+            <ProjectCard project={progetti[3]} aspect="aspect-[16/9]" />
+          </div>
+
+          {/* Row 3: three uneven columns */}
+          <div className="portfolio-item col-span-12 md:col-span-5 md:mt-8">
+            <ProjectCard project={progetti[4]} aspect="aspect-[4/5]" />
+          </div>
+          <div className="portfolio-item col-span-12 md:col-span-3 md:-mt-12">
+            <ProjectCard project={progetti[5]} aspect="aspect-square" />
+          </div>
+          <div className="portfolio-item col-span-12 md:col-span-4 md:mt-4">
+            <ProjectCard project={progetti[6]} aspect="aspect-[3/4]" />
+          </div>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="px-6 md:px-12 lg:px-20 mt-20 md:mt-28 flex flex-col md:flex-row items-start md:items-center gap-6">
+        <p className="text-white/30 text-sm font-medium">Vuoi vedere il tuo progetto qui?</p>
+        <a href="#contatti" className="group flex items-center gap-4">
+          <span className="font-sans text-[13px] uppercase tracking-[0.2em] text-white font-medium group-hover:text-rust transition-colors duration-500">Contattaci</span>
+          <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-rust group-hover:border-rust transition-all duration-500">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </a>
+      </div>
     </section>
+  )
+}
+
+function ProjectCard({ project, aspect }) {
+  return (
+    <div className="group relative overflow-hidden cursor-pointer">
+      <div className={`${aspect} overflow-hidden`}>
+        <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" loading="lazy" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+        <span className="text-[10px] uppercase tracking-[0.2em] text-rust font-medium">{project.type}</span>
+        <h3 className="font-sans text-lg font-bold text-white mt-1">{project.title}</h3>
+        <span className="text-[12px] text-white/50">{project.location}</span>
+      </div>
+    </div>
   )
 }

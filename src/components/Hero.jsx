@@ -1,77 +1,76 @@
-import heroBg from '../assets/foto/foto-1.webp'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import heroBg from '../assets/foto/foto-8.webp'
+import heroOverlay from '../assets/foto/foto-11.webp'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
+  const sectionRef = useRef(null)
+  const imageRef = useRef(null)
+  const overlayImgRef = useRef(null)
+  const headlineRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(imageRef.current, {
+        yPercent: 20,
+        ease: 'none',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom top', scrub: 1 },
+      })
+      const kids = headlineRef.current?.children
+      if (kids) {
+        gsap.from(kids, { y: 120, opacity: 0, duration: 1.4, stagger: 0.12, ease: 'power4.out', delay: 0.3 })
+      }
+      gsap.from(overlayImgRef.current, { y: 80, opacity: 0, scale: 0.9, duration: 1.6, ease: 'power3.out', delay: 0.8 })
+      gsap.to(overlayImgRef.current, {
+        yPercent: -30, scale: 0.95, ease: 'none',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top top', end: 'bottom top', scrub: 1.5 },
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroBg}
-          alt="Campo da padel indoor realizzato da CN Innovation"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-800/80 to-primary-900/70" />
+    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-midnight">
+      <div className="absolute inset-0 scale-110" ref={imageRef}>
+        <img src={heroBg} alt="Campo da padel per torneo FIP Tour" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-midnight/60" />
       </div>
-
-      {/* Content */}
-      <div className="relative z-10 container-custom mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-        <div className="max-w-3xl">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
-            <span className="w-2 h-2 rounded-full bg-accent-500 animate-pulse" />
-            <span className="text-sm text-white/90 font-medium">Operativi in Italia e in tutta Europa</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
-            Impianti sportivi{' '}
-            <span className="text-accent-400">chiavi in mano</span>
-            , in Italia e in tutta Europa
-          </h1>
-
-          <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-10 max-w-2xl">
-            Vendita, montaggio e manutenzione di campi da padel e strutture sportive.
-            Dalla progettazione all'installazione, un unico partner per il tuo impianto.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#contatti" className="btn-primary text-lg">
-              Richiedi un preventivo gratuito
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a href="#servizi" className="btn-secondary text-lg">
-              Scopri i nostri servizi
-            </a>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20">
-            <div>
-              <div className="text-3xl sm:text-4xl font-bold text-white">100+</div>
-              <div className="text-sm text-white/60 mt-1">Impianti realizzati</div>
-            </div>
-            <div>
-              <div className="text-3xl sm:text-4xl font-bold text-white">10+</div>
-              <div className="text-sm text-white/60 mt-1">Paesi serviti</div>
-            </div>
-            <div>
-              <div className="text-3xl sm:text-4xl font-bold text-white">100%</div>
-              <div className="text-sm text-white/60 mt-1">Squadre proprie</div>
-            </div>
+      <div className="relative z-10 min-h-screen flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12">
+        <div className="absolute top-28 md:top-32 left-6 md:left-12">
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-rust animate-pulse" />
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/50 font-medium">Italia & Europa — Impianti Sportivi</span>
           </div>
         </div>
+        <div ref={overlayImgRef} className="absolute top-32 right-6 md:top-36 md:right-12 w-[45vw] md:w-[28vw] max-w-[400px] aspect-[3/4] hidden md:block">
+          <img src={heroOverlay} alt="Campo da padel panoramico" className="w-full h-full object-cover" />
+          <div className="absolute -bottom-4 -left-4 bg-rust text-white px-4 py-2 font-sans text-[11px] uppercase tracking-[0.2em] font-medium">Chiavi in mano</div>
+        </div>
+        <div ref={headlineRef} className="max-w-[90vw] md:max-w-[65vw]">
+          <div className="overflow-hidden"><h1 className="heading-xl text-white">Costruiamo</h1></div>
+          <div className="overflow-hidden"><h1 className="heading-xl text-white/40">il futuro del</h1></div>
+          <div className="overflow-hidden"><h1 className="heading-xl"><span className="text-serif-italic text-rust" style={{fontSize:'1.05em'}}>padel</span></h1></div>
+        </div>
+        <div className="flex flex-col md:flex-row md:items-end gap-8 md:gap-0 mt-12 md:mt-16">
+          <p className="text-white/50 text-sm md:text-base max-w-sm leading-relaxed md:mr-auto">Vendita, montaggio e manutenzione di campi da padel e strutture sportive. Dalla progettazione all'installazione, un unico partner.</p>
+          <a href="#contatti" className="group flex items-center gap-4 self-start md:self-auto">
+            <span className="font-sans text-[13px] uppercase tracking-[0.2em] text-white font-medium group-hover:text-rust transition-colors duration-500">Richiedi preventivo</span>
+            <span className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-rust group-hover:border-rust transition-all duration-500">
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </span>
+          </a>
+        </div>
+        <div className="flex gap-12 md:gap-20 mt-12 md:mt-16 border-t border-white/10 pt-8">
+          <div><span className="block font-sans text-3xl md:text-4xl font-bold text-white">100+</span><span className="block text-[11px] uppercase tracking-[0.2em] text-white/30 mt-1 font-medium">Impianti</span></div>
+          <div><span className="block font-sans text-3xl md:text-4xl font-bold text-white">10+</span><span className="block text-[11px] uppercase tracking-[0.2em] text-white/30 mt-1 font-medium">Paesi</span></div>
+          <div><span className="block font-sans text-3xl md:text-4xl font-bold text-rust">360°</span><span className="block text-[11px] uppercase tracking-[0.2em] text-white/30 mt-1 font-medium">Servizio</span></div>
+        </div>
       </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <a href="#chi-siamo" className="flex flex-col items-center gap-2 text-white/50 hover:text-white/80 transition-colors">
-          <span className="text-xs uppercase tracking-widest">Scopri di più</span>
-          <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </a>
+      <div className="absolute bottom-6 left-6 md:left-12 z-10">
+        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden"><div className="absolute top-0 left-0 w-full h-1/2 bg-white animate-bounce" /></div>
       </div>
     </section>
   )
