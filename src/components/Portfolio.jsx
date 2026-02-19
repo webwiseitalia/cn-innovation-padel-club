@@ -44,15 +44,15 @@ export default function Portfolio() {
   }, [])
 
   return (
-    <section id="portfolio" ref={sectionRef} className="relative py-32 md:py-44 bg-ink overflow-hidden">
+    <section id="portfolio" ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden" style={{ backgroundColor: '#0a0a0a' }}>
       <div className="px-6 md:px-12 lg:px-20 mb-16 md:mb-24">
         <div className="grid grid-cols-12 gap-4">
-          <div className="col-span-12 md:col-span-8">
-            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">(Portfolio)</span>
-            <h2 className="heading-lg text-white mt-4">Progetti<br /><span className="text-serif-italic text-rust">realizzati</span></h2>
-          </div>
           <div className="col-span-12 md:col-span-4 md:flex md:items-end">
             <p className="text-body text-white/30 mb-2">Ogni impianto racconta una storia di competenza, precisione e passione.</p>
+          </div>
+          <div className="col-span-12 md:col-span-8 md:text-right">
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">(Portfolio)</span>
+            <h2 className="heading-lg text-white mt-4">Progetti<br /><span className="text-serif-italic" style={{ color: 'rgba(255,255,255,0.5)' }}>realizzati</span></h2>
           </div>
         </div>
       </div>
@@ -93,8 +93,8 @@ export default function Portfolio() {
       <div className="px-6 md:px-12 lg:px-20 mt-20 md:mt-28 flex flex-col md:flex-row items-start md:items-center gap-6">
         <p className="text-white/30 text-sm font-medium">Vuoi vedere il tuo progetto qui?</p>
         <a href="#contatti" className="group flex items-center gap-4">
-          <span className="font-sans text-[13px] uppercase tracking-[0.2em] text-white font-medium group-hover:text-rust transition-colors duration-500">Contattaci</span>
-          <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-rust group-hover:border-rust transition-all duration-500">
+          <span className="font-sans text-[13px] uppercase tracking-[0.2em] text-white font-medium group-hover:opacity-70 transition-all duration-500">Contattaci</span>
+          <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-500">
             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </span>
         </a>
@@ -107,11 +107,11 @@ function ProjectCard({ project, aspect }) {
   return (
     <div className="group relative overflow-hidden cursor-pointer">
       <div className={`${aspect} overflow-hidden`}>
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" loading="lazy" />
+        <img src={project.image} alt={project.title} title={project.title} width={640} height={480} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out" loading="lazy" />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.8), rgba(10,10,10,0.1), transparent)' }} />
       <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-        <span className="text-[10px] uppercase tracking-[0.2em] text-rust font-medium">{project.type}</span>
+        <span className="text-[10px] uppercase tracking-[0.2em] text-white/60 font-medium">{project.type}</span>
         <h3 className="font-sans text-lg font-bold text-white mt-1">{project.title}</h3>
         <span className="text-[12px] text-white/50">{project.location}</span>
       </div>

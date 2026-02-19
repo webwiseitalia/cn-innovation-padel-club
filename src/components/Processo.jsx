@@ -42,20 +42,20 @@ export default function Processo() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative py-32 md:py-44 bg-midnight overflow-hidden">
+    <section ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden" style={{ backgroundColor: '#0d1b2a' }}>
       {/* Large decorative text */}
-      <div className="absolute top-20 right-0 font-sans text-[20vw] font-bold text-white/[0.02] leading-none select-none pointer-events-none">
+      <div className="absolute top-20 left-0 font-sans text-[20vw] font-bold leading-none select-none pointer-events-none" style={{ color: 'rgba(255,255,255,0.02)' }}>
         PROCESS
       </div>
 
       <div className="px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-12 gap-4 md:gap-8 mb-16 md:mb-24">
-          <div className="col-span-12 md:col-span-6">
-            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">(Come Lavoriamo)</span>
-            <h2 className="heading-lg text-white mt-4">Dal contatto<br />alla <span className="text-serif-italic text-rust">consegna</span></h2>
-          </div>
-          <div className="col-span-12 md:col-span-4 md:col-start-8 md:flex md:items-end">
+          <div className="col-span-12 md:col-span-4 md:flex md:items-end">
             <p className="text-body text-white/30 mb-2">Un processo chiaro e trasparente, pensato per garantire la massima qualità in ogni fase.</p>
+          </div>
+          <div className="col-span-12 md:col-span-6 md:col-start-7 md:text-right">
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">(Come Lavoriamo)</span>
+            <h2 className="heading-lg text-white mt-4">Dal contatto<br />alla <span className="text-serif-italic" style={{ color: '#f5f0eb' }}>consegna</span></h2>
           </div>
         </div>
 
@@ -64,7 +64,7 @@ export default function Processo() {
           {/* Progress line */}
           <div className="hidden md:block col-span-1 relative">
             <div className="absolute top-0 bottom-0 left-1/2 w-[1px] bg-white/10">
-              <div ref={lineRef} className="absolute top-0 left-0 w-full h-full bg-rust" />
+              <div ref={lineRef} className="absolute top-0 left-0 w-full h-full" style={{ backgroundColor: '#f5f0eb' }} />
             </div>
           </div>
 
@@ -73,10 +73,10 @@ export default function Processo() {
             {steps.map((step, i) => (
               <div key={i} className="process-step flex gap-6 md:gap-10 py-8 md:py-10 border-b border-white/5 group">
                 <div className="flex-shrink-0 w-12 md:w-16 flex items-start">
-                  <span className="font-sans text-3xl md:text-4xl font-bold text-white/10 group-hover:text-rust transition-colors duration-500">{step.num}</span>
+                  <span className="font-sans text-3xl md:text-4xl font-bold text-white/10 group-hover:text-white/40 transition-colors duration-500">{step.num}</span>
                 </div>
                 <div>
-                  <h3 className="font-sans text-xl md:text-2xl font-bold text-white group-hover:text-rust transition-colors duration-300">{step.title}</h3>
+                  <h3 className="font-sans text-xl md:text-2xl font-bold text-white/80 group-hover:text-white transition-colors duration-300">{step.title}</h3>
                   <p className="text-body text-white/30 mt-2">{step.desc}</p>
                 </div>
               </div>

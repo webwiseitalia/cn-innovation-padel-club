@@ -6,7 +6,7 @@
   --ink: #0a0a0a;
   --paper: #f5f0eb;
   --cream: #ede7df;
-  --rust: #c43e1c;
+  --rust: #0d1b2a;
   --midnight: #0d1b2a;
   --slate: #415a77;
 }
@@ -103,6 +103,31 @@ body {
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+#contatti input::placeholder,
+#contatti textarea::placeholder,
+#contatti select {
+  color: rgba(10,10,10,0.35);
+}
+
+#contatti select option {
+  color: #0a0a0a;
+  background: #f5f0eb;
+}
+
+#contatti input:focus,
+#contatti textarea:focus,
+#contatti select:focus {
+  border-color: #0d1b2a;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 ::-webkit-scrollbar {

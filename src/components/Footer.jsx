@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom'
 import logo from '../assets/logo.webp'
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-white">
+    <footer className="text-white" style={{ backgroundColor: '#0a0a0a' }}>
       {/* Marquee band */}
       <div className="border-y border-white/5 py-6 overflow-hidden">
         <div className="marquee-track whitespace-nowrap">
@@ -19,13 +20,13 @@ export default function Footer() {
         <div className="grid grid-cols-12 gap-8 md:gap-12">
           {/* Logo + tagline */}
           <div className="col-span-12 md:col-span-4">
-            <img src={logo} alt="CN Innovation" className="h-14 w-auto brightness-0 invert mb-8" />
+            <img src={logo} alt="CN Innovation" title="CN Innovation - Logo" loading="lazy" width={160} height={56} className="h-14 w-auto brightness-0 invert mb-8" />
             <p className="text-white/30 text-sm leading-relaxed max-w-xs">
               C.N. Innovation di Nunez Banegas Carolina Ines — Vendita, montaggio e manutenzione di impianti sportivi.
             </p>
             <div className="flex items-center gap-2 mt-6">
-              <div className="w-1.5 h-1.5 rounded-full bg-rust" />
-              <span className="text-[11px] uppercase tracking-[0.2em] text-rust font-medium">Operativi in Italia e in tutta Europa</span>
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#f5f0eb' }} />
+              <span className="text-[11px] uppercase tracking-[0.2em] font-medium" style={{ color: '#f5f0eb' }}>Operativi in Italia e in tutta Europa</span>
             </div>
           </div>
 
@@ -59,8 +60,8 @@ export default function Footer() {
               <p className="text-white/40">info@cninnovation.it</p>
             </div>
             <div className="flex gap-6 mt-6">
-              <a href="https://www.instagram.com/cninnov/" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-rust transition-colors duration-300 text-sm font-medium">IG</a>
-              <a href="https://www.facebook.com/p/CN-Innovation-100083125581065/" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-rust transition-colors duration-300 text-sm font-medium">FB</a>
+              <a href="https://www.instagram.com/cninnov/" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors duration-300 text-sm font-medium">IG</a>
+              <a href="https://www.facebook.com/p/CN-Innovation-100083125581065/" target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors duration-300 text-sm font-medium">FB</a>
             </div>
           </div>
         </div>
@@ -71,8 +72,8 @@ export default function Footer() {
         <div className="px-6 md:px-12 lg:px-20 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/20 text-[11px]">© {new Date().getFullYear()} C.N. Innovation — Tutti i diritti riservati</p>
           <div className="flex gap-6">
-            <a href="#" className="text-white/20 text-[11px] hover:text-white/50 transition-colors">Privacy</a>
-            <a href="#" className="text-white/20 text-[11px] hover:text-white/50 transition-colors">Cookie</a>
+            <Link to="/privacy-policy" onClick={() => window.scrollTo(0, 0)} className="text-white/20 text-[11px] hover:text-white/50 transition-colors">Privacy Policy</Link>
+            <Link to="/cookie-policy" onClick={() => window.scrollTo(0, 0)} className="text-white/20 text-[11px] hover:text-white/50 transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>

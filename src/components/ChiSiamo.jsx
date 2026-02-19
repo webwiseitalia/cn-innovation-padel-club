@@ -38,13 +38,13 @@ export default function ChiSiamo() {
   }, [])
 
   return (
-    <section id="chi-siamo" ref={sectionRef} className="relative py-32 md:py-44 bg-paper overflow-hidden">
-      <div className="absolute top-12 -left-4 font-sans text-[15vw] font-bold text-ink/[0.02] leading-none select-none pointer-events-none whitespace-nowrap">INNOVATION</div>
+    <section id="chi-siamo" ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden" style={{ backgroundColor: '#f5f0eb' }}>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-sans text-[15vw] font-bold leading-none select-none pointer-events-none whitespace-nowrap" style={{ color: 'rgba(10,10,10,0.03)' }}>INNOVATION</div>
       <div className="px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-12 gap-4 md:gap-8">
           <div className="col-span-12 md:col-span-3 mb-8 md:mb-0">
             <hr className="rule-accent mb-6" />
-            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-slate font-medium">Chi Siamo</span>
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-grigio font-medium">Chi Siamo</span>
           </div>
           <div ref={textRef} className="col-span-12 md:col-span-7 md:col-start-4">
             <h2 className="heading-lg text-ink mb-8">
@@ -60,16 +60,16 @@ export default function ChiSiamo() {
         <div className="grid grid-cols-12 gap-4 mt-20 md:mt-32">
           <div className="col-span-12 md:col-span-7" ref={img1Ref}>
             <div className="relative aspect-[16/10] overflow-hidden">
-              <img src={foto3} alt="Squadra CN Innovation al lavoro" className="w-full h-full object-cover" />
+              <img src={foto3} alt="Squadra CN Innovation al lavoro" title="Team CN Innovation durante installazione" loading="lazy" width={640} height={400} className="w-full h-full object-cover" />
             </div>
           </div>
           <div className="col-span-12 md:col-span-4 md:col-start-9 md:-mt-16" ref={img2Ref}>
             <div className="relative aspect-[3/4] overflow-hidden">
-              <img src={foto5} alt="Dettaglio pavimentazione" className="w-full h-full object-cover" />
+              <img src={foto5} alt="Dettaglio pavimentazione" title="Dettaglio erba sintetica campo padel" loading="lazy" width={640} height={853} className="w-full h-full object-cover" />
             </div>
             <div className="mt-4 flex items-start gap-3">
               <span className="font-sans text-4xl font-bold text-rust leading-none">25.11</span>
-              <span className="text-[11px] uppercase tracking-[0.15em] text-slate mt-2 font-medium leading-tight">Cod. Ateco<br />Fabbricazione<br />strutture metalliche</span>
+              <span className="text-[11px] uppercase tracking-[0.15em] text-grigio mt-2 font-medium leading-tight">Cod. Ateco<br />Fabbricazione<br />strutture metalliche</span>
             </div>
           </div>
         </div>

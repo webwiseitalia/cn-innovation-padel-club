@@ -28,12 +28,12 @@ export default function Servizi() {
   }, [])
 
   return (
-    <section id="servizi" ref={sectionRef} className="relative py-32 md:py-44 bg-midnight overflow-hidden">
+    <section id="servizi" ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden" style={{ backgroundColor: '#0d1b2a' }}>
       <div className="px-6 md:px-12 lg:px-20 mb-20 md:mb-28">
-        <div className="flex flex-col md:flex-row md:items-end gap-8 md:gap-20">
-          <div>
+        <div className="flex flex-col md:flex-row-reverse md:items-end gap-8 md:gap-20">
+          <div className="md:text-right">
             <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">(Servizi)</span>
-            <h2 className="heading-lg text-white mt-4">Cosa<br /><span className="text-serif-italic text-rust">facciamo</span></h2>
+            <h2 className="heading-lg text-white mt-4">Cosa<br /><span className="text-serif-italic" style={{ color: '#f5f0eb' }}>facciamo</span></h2>
           </div>
           <p className="text-body text-white/40 max-w-md mb-2">Dalla vendita alla manutenzione, un servizio completo per ogni fase del tuo impianto sportivo.</p>
         </div>
@@ -43,7 +43,7 @@ export default function Servizi() {
           <div key={i} className="servizio-item border-t border-white/10 py-12 md:py-16 grid grid-cols-12 gap-4 md:gap-8 group">
             <div className="col-span-2 md:col-span-1"><span className="font-sans text-sm text-white/20 font-medium">{s.num}</span></div>
             <div className="col-span-10 md:col-span-5">
-              <h3 className="heading-md text-white group-hover:text-rust transition-colors duration-500">{s.title}<br /><span className="text-serif-italic">{s.subtitle}</span></h3>
+              <h3 className="heading-md text-white/80 group-hover:text-white transition-colors duration-500">{s.title}<br /><span className="text-serif-italic">{s.subtitle}</span></h3>
             </div>
             <div className="col-span-12 md:col-span-5 md:col-start-7 mt-4 md:mt-0">
               <p className="text-body text-white/40 mb-6">{s.desc}</p>
@@ -54,7 +54,7 @@ export default function Servizi() {
               </div>
             </div>
             <div className="hidden md:flex col-span-1 items-start justify-end pt-2">
-              <a href="#contatti" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-rust group-hover:border-rust transition-all duration-500">
+              <a href="#contatti" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:border-white/30 transition-all duration-500">
                 <svg className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </div>

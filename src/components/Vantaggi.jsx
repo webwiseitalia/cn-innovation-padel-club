@@ -40,12 +40,12 @@ export default function Vantaggi() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative py-32 md:py-44 bg-paper overflow-hidden">
+    <section ref={sectionRef} className="relative py-32 md:py-44 overflow-hidden" style={{ backgroundColor: '#f5f0eb' }}>
       <div className="px-6 md:px-12 lg:px-20">
         <div className="grid grid-cols-12 gap-4 md:gap-8">
           {/* Left: content */}
           <div className="col-span-12 md:col-span-7">
-            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-slate font-medium">(Perché Noi)</span>
+            <span className="font-sans text-[11px] uppercase tracking-[0.25em] text-grigio font-medium">(Perché Noi)</span>
             <h2 className="heading-lg text-ink mt-4 mb-16 md:mb-20">
               Perché scegliere<br /><span className="text-serif-italic text-rust">CN Innovation</span>
             </h2>
@@ -65,7 +65,7 @@ export default function Vantaggi() {
           <div className="hidden md:block col-span-4 col-start-9 relative">
             <div className="sticky top-32" ref={imageRef}>
               <div className="aspect-[3/5] overflow-hidden">
-                <img src={foto2} alt="Dettaglio erba sintetica campo da padel" className="w-full h-full object-cover" />
+                <img src={foto2} alt="Dettaglio erba sintetica campo da padel" title="Erba sintetica per campo da padel" loading="lazy" width={640} height={1067} className="w-full h-full object-cover" />
               </div>
               <div className="mt-6">
                 <span className="font-sans text-6xl font-bold text-ink/5">CN</span>
